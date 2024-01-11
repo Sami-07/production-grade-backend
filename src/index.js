@@ -1,8 +1,7 @@
 import 'dotenv/config'
 import express from "express";
 import connectDB from "./db/index.js";
-
-const app = express();
+import {app} from "./app.js";
 
 // Connect to DB as soon as index is loaded
 connectDB().then(() => {

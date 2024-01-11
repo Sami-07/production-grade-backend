@@ -47,9 +47,11 @@ const userSchema = new mongoose.Schema({
     timestamps: true
 })
 
+//pre save hook will run just before saving the user
+//we used if else because we don't want to hash the password again and again when we update the user details like avatar
 userSchema.pre("save", async function (next) {
     if (this.isModified("password")) {
-        this.password = bcrypt.hashSync(this.password, 10);
+        this.password = await bcrypt.hash(this.password, 10);
         next();
     }
     else {
